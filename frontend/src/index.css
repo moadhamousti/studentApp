@@ -1,0 +1,276 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --color-bg: #1f1f38;
+  --color-bg-variant: #2c2c6c;
+  --color-primary: #4db5ff;
+  --color-primary-variant: rgba(77, 181, 255, 0.4);
+  --color-light: rgba(255, 255, 255, 0.6);
+}
+
+/* FORM */
+.register {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* color: #ffffff; */
+  /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1510936111840-65e151ad71bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=890&q=80"); */
+  /* background-color: var(--color-bg);
+  background-size: cover;
+  background-blend-mode: darken; */
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.registerTitle {
+  font-size: 50px;
+}
+
+.registerForm {
+  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.registerForm>label {
+  margin: 10px 0;
+  color: rgb(0, 0, 0);
+}
+
+.button-del-cancel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 30px;
+}
+.Reg-text{
+  text-align: center;
+}
+
+.registerInput {
+  padding: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.registerInput:focus {
+  outline: none;
+}
+
+#input{
+  outline: rgb(8, 149, 188);
+}
+
+.registerButton {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+.Container{
+  font-family: 'Poppins', sans-serif;
+}
+
+.HomeButtons{
+  display: flex ;
+  gap: 30px;
+}
+.editButton {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #2138cf;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.editButton:hover {
+  background-color: #2e82f7;
+}
+
+
+.registerButton:hover {
+  background-color: #313131;
+}
+
+@media screen and (max-width: 480px) {
+  .register {
+    background-position: right;
+  }
+
+  .registerInput {
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .registerButton {
+    font-size: 16px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+}
+
+
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.subtitle {
+  font-size: 25px;
+  border: 1px solid black;
+  box-shadow: 4px 4px 2px black;
+  padding: 5px 10px;
+}
+
+
+
+
+.greeting span{
+  font-weight: 500;
+  color: #2e82f7;
+}
+
+
+.title{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+.title span{
+  color: #2e82f7;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.quizInfo {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  margin: 10px;
+}
+
+.quizInfo span{
+  font-weight: 500;
+}
+
+.quizInfo span strong{
+  font-weight: 700;
+  color: #2e82f7;
+  margin-left: 10px;
+}
+
+
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 30px 30px 30px;
+}
+
+.settings {
+  width: 45%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.banner {
+  width: 55%;
+  align-self: center;
+  padding: 8px;
+}
+
+@media (max-width: 800px) {
+  .content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .banner {
+    width: 85%;
+    padding: 0;
+    padding-top: 20px;
+  }
+  .settings {
+    width: 100%;
+  }
+}
+
+.settings__select {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 100%;
+  flex: 0.8;
+  justify-content: space-evenly;
+}
+
+/* input[type="file"]{
+  display: none;
+} */
+.custom-image-upload {
+  margin: auto;
+  border: 1px solid #ccc;
+  display: inline-block;
+  width: 100px; /* Adjust the size of the container */
+  height: 100px; /* Adjust the size of the container */
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Ensure the image stays within the circular container */
+  position: relative; /* Position relative for absolute positioning of the image */
+}
+
+.custom-image-upload img {
+  width: 100%; /* Ensure the image fills the container */
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  position: absolute; /* Position absolute to fill the container */
+  top: 0; /* Position at the top */
+  left: 0; /* Position at the left */
+}
+
+.custom-image-upload input[type="file"] {
+  display: none; /* Hide the file input */
+}
+
+
+
+
+/* .gradiant-color{
+  background: linear-gradient(270deg, rgba(0,92,255,1) 0%, rgba(84,145,255,1) 35%, rgba(0,212,255,1) 100%);
+
+} */
+
+
+
