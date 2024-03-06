@@ -112,7 +112,7 @@ router.get('/ComplainList/:id', complainList);
 router.post('/Teacher/addcourse/:teacherID', courseCreate);
 router.delete('/Teacher/courses/:courseID', deleteCourse);
 router.get('/Teacher/courses/:teacherID', courseList);
-router.get('/Teacher/courses/:courseID', getCourseDetails);
+router.get('/Teacher/courses/:courseId', getCourseDetails);
 
 
 router.get('/Student/courses/:studentID', StudentcourseList);

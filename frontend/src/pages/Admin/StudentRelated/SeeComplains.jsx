@@ -143,7 +143,7 @@ const SeeComplains = () => {
         :
         <>
           {response ?
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '16px', fontWeight:'500' }}>
               No Complains Right Now
             </Box>
             :

@@ -111,17 +111,21 @@ const SubjectForm = () => {
     }, [status, navigate, error, response, dispatch]);
 
     return (
-        <Container>
+        <Container sx={{marginTop: '25px' }}>
+            <Box mb={2} sx={{marginTop: '25px' }}>
+                <Typography variant="h5" sx={{textAlign:'center', fontWeight:'600' }} >Add Subjects</Typography>
+            </Box>
+            <MenuItem value="" disabled>
+                Select from existed subjects
+            </MenuItem>
             <Select
                 label="Select Subject"
-                value={subjects[0].subName} // Assuming you want to select the subject for the first entry in the subjects array
-                onChange={handleSubjectNameChange(0)} // Assuming you want to change the subject for the first entry in the subjects array
+                value={subjects[0].subName} 
+                onChange={handleSubjectNameChange(0)} 
                 fullWidth
                 required
+                sx={{marginBottom: '25px' }}
             >
-                <MenuItem value="" disabled>
-                    Select a subject
-                </MenuItem>
                 {loading ? (
                     <MenuItem disabled>Loading...</MenuItem>
                 ) : existingSubjects.length === 0 ? (
@@ -136,9 +140,6 @@ const SubjectForm = () => {
             </Select>
 
             <form onSubmit={submitHandler}>
-                <Box mb={2}>
-                    <Typography variant="h6" >Add Subjects</Typography>
-                </Box>
                 <Grid container spacing={2}>
                     {subjects.map((subject, index) => (
                         <React.Fragment key={index}>
@@ -184,6 +185,7 @@ const SubjectForm = () => {
                                             variant="outlined"
                                             color="primary"
                                             onClick={handleAddSubject}
+                                            sx={{marginTop: '10px' }}
                                         >
                                             Add Subject
                                         </Button>

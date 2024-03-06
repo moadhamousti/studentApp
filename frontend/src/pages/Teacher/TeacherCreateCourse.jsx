@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { TextField, Button, FormControl, InputLabel, MenuItem, Select, Typography, Box } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSubjects } from '../../redux/subjectRelated/subjectHandle'; // Update the path to your subject slice
 import { useNavigate } from 'react-router-dom';
+import { AddButton } from '../../components/buttonStyles';
 
 const TeacherCreateCourse = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,10 @@ const TeacherCreateCourse = () => {
     }
   };
 
+  const editorStyle = {
+    height: '100px', // Adjust the height as needed
+  };
+
   // Set user name on component mount
   useEffect(() => {
     if (currentUser) {
@@ -73,63 +78,77 @@ const TeacherCreateCourse = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom style={{ marginTop:'20px', marginBottom:'20px', fontWeight:'600' }} >
         Create Course
       </Typography>
-      <TextField
-        name="teacher"
-        label="Teacher"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        fullWidth
-        disabled
-      />
-      <TextField
-        name="title"
-        label="Title"
-        value={formData.title}
-        onChange={handleChange}
-        fullWidth
-        required
-      />
-      <TextField
-        name="description"
-        label="Description"
-        value={formData.description}
-        onChange={handleChange}
-        fullWidth
-        multiline
-        required
-      />
-      <ReactQuill
-        value={formData.article}
-        onChange={handleEditorChange}
-      />
-      <FormControl fullWidth>
-        <InputLabel id="subject-label">Subject</InputLabel>
-        <Select
-          labelId="subject-label"
-          id="subject"
-          name="subject"
-          value={formData.subject}
+      <Box style={{ paddingLeft:'50px', paddingRight:'50px'}}>
+        <TextField
+          name="teacher"
+          label="Teacher"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          size='medium'
+          fullWidth
+          disabled
+          variant="filled"
+          style={{ marginBottom:'20px'}}
+        />
+        <FormControl fullWidth>
+          <InputLabel id="subject-label">Subject</InputLabel>
+          <Select
+            labelId="subject-label"
+            id="subject"
+            variant="filled"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            required
+            style={{ marginBottom:'20px'}}
+          >
+            {subjects
+              .filter(subject => subject.subName !== 'Guest Subject')
+              .map(subject => (
+                <MenuItem key={subject._id} value={subject._id}>{subject.subName}</MenuItem>
+              ))
+            }
+          </Select>
+        </FormControl>
+        <TextField
+          name="title"
+          label="Title"
+          value={formData.title}
           onChange={handleChange}
+          fullWidth
+          variant="filled"
+          style={{ marginBottom:'20px'}}
           required
-        >
-          {subjects
-            .filter(subject => subject.subName !== 'Guest Subject')
-            .map(subject => (
-              <MenuItem key={subject._id} value={subject._id}>{subject.subName}</MenuItem>
-            ))
-          }
-        </Select>
-      </FormControl>
-      <Button
+        />
+        <TextField
+          name="description"
+          label="Description"
+          value={formData.description}
+          onChange={handleChange}
+          fullWidth
+          multiline
+          variant="filled"
+          required
+          style={{ marginBottom:'20px'}}
+        />
+        <ReactQuill
+  value={formData.article}
+  onChange={handleEditorChange}
+  style={editorStyle}
+/>
+      </Box>
+      
+      <AddButton
         type="submit"
         variant="contained"
         color="primary"
+        style={{ marginBottom:'20px', marginTop:'70px'}}
       >
         Create Course
-      </Button>
+      </AddButton>
     </form>
   );
 };

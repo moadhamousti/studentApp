@@ -119,7 +119,7 @@ const TeacherDashboard = () => {
 
                             <Route path="/Teacher/addcourse/:teacherID" element={<TeacherCreateCourse situation="Course"/>} />
                             <Route path="/Teacher/courses" element={<TeacherCourses />} />
-                            <Route path="/Teacher/courses/:courseID" element={<TeacherCourseDetails situation="Course"/>} />
+                            <Route path="/Teacher/courses/:courseId" element={<TeacherCourseDetails situation="Course"/>} />
 
 
                         

@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'; // Import Axios
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCourseDetails } from '../../redux/courseRelated/courseHandle';
 
 const TeacherCourseDetails = () => {
   const { courseId } = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const courseDetails = useSelector((state) => state.course.courseDetails);
+  const [courseDetails, setCourseDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCourseDetails = async () => {
       if (!courseId) return;
 
       try {
         setLoading(true);
         setError(null);
-        await dispatch(getCourseDetails(courseId));
+
+        console.log('Fetching course details...'); // Log fetching process
+
+        // Fetch course details directly using Axios
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/Teacher/courses/${courseId}`);
+        setCourseDetails(response.data);
+
         setLoading(false);
+        console.log('Course details fetched successfully:', courseDetails); // Log successful fetching
       } catch (error) {
         console.error('Error fetching course details:', error);
         setError(error.message);
@@ -28,8 +33,11 @@ const TeacherCourseDetails = () => {
       }
     };
 
-    fetchData();
-  }, [courseId, dispatch]);
+    fetchCourseDetails();
+  }, [courseId]);
+
+  console.log('Loading:', loading); // Log loading state
+  console.log('Error:', error); // Log error state
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -4,11 +4,11 @@ const Course = require('../models/courseSchema');
 
 const getCourseDetails = async (req, res) => {
     try {
-        const courseID = req.params._id; // Corrected
-        console.log('Received courseId:', courseID);
+        const courseId = req.params.courseId; 
+        console.log('Received courseId:', courseId);
 
         // Find the course by its ID
-        const course = await Course.findById(courseID);
+        const course = await Course.findById(courseId);
 
         // Check if the course exists
         if (!course) {

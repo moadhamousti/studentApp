@@ -43,6 +43,7 @@ const BlueButton = styled(Button)`
   && {
     background-color: #1877f2;
     color: #fff;
+    margin-right: 8px;
     &:hover {
       background-color: #0780b8;
     }
@@ -75,13 +76,16 @@ const LightPurpleButton = styled(Button)`
 `;
 
 const AddButton = styled(Button)`
-  && {
-    background-color: #288dd1;
-    color: #fff;
-    &:hover {
-      background-color: #5ab5f2;
-    }
+&& {
+  background-color: #288dd1;
+  color: #fff;
+  &:hover {
+    background-color: #5ab5f2;
   }
+  margin: 0 auto; /* Centering the button */
+  display: block; /* Ensuring it takes up the full width */
+  margin-top:20px;
+}
 `;
 
 const BrownButton = styled(Button)`

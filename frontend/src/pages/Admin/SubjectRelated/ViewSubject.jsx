@@ -63,7 +63,7 @@ const ViewSubject = () => {
           onClick={() => navigate("/Admin/students/student/" + row.id)}
         >
           View
-        </BlueButton>
+        </BlueButton >
         <PurpleButton
           variant="contained"
           onClick={() =>
@@ -109,7 +109,7 @@ const ViewSubject = () => {
           </>
         ) : (
           <>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h4" sx={{textAlign:'left', fontWeight:'600' }}  gutterBottom>
               Students List:
             </Typography>
 
@@ -146,34 +146,47 @@ const ViewSubject = () => {
 
     return (
       <>
-        <Typography variant="h4" align="center" gutterBottom>
-          Subject Details
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Subject Name : {subjectDetails && subjectDetails.subName}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Subject Code : {subjectDetails && subjectDetails.subCode}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Subject Sessions : {subjectDetails && subjectDetails.sessions}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Number of Students: {numberOfStudents}
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Class Name : {subjectDetails && subjectDetails.sclassName && subjectDetails.sclassName.sclassName}
-        </Typography>
-        {subjectDetails && subjectDetails.teacher ?
-          <Typography variant="h6" gutterBottom>
-            Teacher Name : {subjectDetails.teacher.name}
+          <Typography style={{ fontWeight: 'bold', fontSize: '2rem' }} variant="h4" align="center" gutterBottom>
+            Subject Details
           </Typography>
-          :
-          <AddButton variant="contained"
-            onClick={() => navigate("/Admin/teachers/addteacher/" + subjectDetails._id)}>
-            Add Subject Teacher
-          </AddButton>
-        }
+        <Box bgcolor="#c9c3c3"
+            boxShadow={2}
+            borderRadius={4}
+            p={2}
+            mb={2}
+        >
+          <Typography align="center" variant="h5" gutterBottom style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+            Subject Name :  <br />
+            <span style={{ color: '#004aba' }}>{subjectDetails && subjectDetails.subName}</span>
+          </Typography>
+          <Typography align="center" variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+            Subject Code : 
+            <span style={{ color: '#004aba' }}>{subjectDetails && subjectDetails.subCode}</span>
+          </Typography>
+          <Typography align="center" variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+            Subject Sessions : 
+            <span style={{ color: '#004aba' }}>{subjectDetails && subjectDetails.sessions}</span>
+          </Typography>
+          <Typography align="center" variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+            Number of Students: 
+            <span style={{ color: '#004aba' }}>{numberOfStudents}</span>
+          </Typography>
+          <Typography align="center" variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+            Class Name : 
+            <span style={{ color: '#004aba' }}>{subjectDetails && subjectDetails.sclassName && subjectDetails.sclassName.sclassName}</span>
+          </Typography>
+          {subjectDetails && subjectDetails.teacher ?
+            <Typography align="center" variant="h6" gutterBottom style={{ fontWeight: 'bold' }}>
+              Teacher Name : 
+              <span style={{ color: '#004aba' }}>{subjectDetails.teacher.name}</span>
+            </Typography>
+            :
+            <AddButton variant="contained"
+              onClick={() => navigate("/Admin/teachers/addteacher/" + subjectDetails._id)}>
+              Add Subject Teacher
+            </AddButton>
+          }
+        </Box>
       </>
     );
   }
