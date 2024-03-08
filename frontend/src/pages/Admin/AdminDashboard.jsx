@@ -138,8 +138,8 @@ const AdminDashboard = () => {
                             <Route path="/Admin/notices" element={<ShowNotices />} />
 
                             {/* Courses */}
-                            <Route path="/Admin/courses" element={<ShowCourses />} />
-                            <Route path="/Admin/courses/:teacherID" element={<CourseList />} />
+                            <Route path="/Admin/courses" element={<CourseList />} />
+                            <Route path="/Admin/courses/:teacherID/:courseID" element={<ShowCourses />} />
 
                             {/* Subject */}
                             <Route path="/Admin/subjects" element={<ShowSubjects />} />

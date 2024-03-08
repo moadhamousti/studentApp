@@ -84,6 +84,18 @@ const courseList = async (req, res) => {
     }
 };
 
+const courseListAdmin = async (req, res) => {
+    try {
+        const teacherID = req.params.teacherID; // Retrieve the teacher ID from the request parameters
+        // Retrieve all courses for the specified teacher
+        const courses = await Course.find({}).populate('teacher');
+        res.status(200).json(courses);
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+        res.status(500).json({ message: 'Error fetching courses' });
+    }
+};
+
 
 
 
@@ -118,4 +130,35 @@ const deleteCourse = async (req, res) => {
     }
   };
 
-module.exports = { getCourseDetails ,courseCreate, courseList, StudentcourseList, deleteCourse};
+
+  const courseDetails = async (req, res) => {
+    try {
+      const { teacherID, courseID } = req.params;
+  
+      // Log the teacherID and courseID
+      console.log('Teacher ID:', teacherID);
+      console.log('Course ID:', courseID);
+  
+      // Assuming you have a Course model
+      const course = await Course.findOne({ _id: courseID }).populate('teacher');
+  
+      // Check if the course exists
+      if (!course) {
+        return res.status(404).json({ message: 'Course not found' });
+      }
+  
+      // Check if the course's teacher ID matches the requested teacher ID
+      if (course.teacher._id.toString() !== teacherID) {
+        return res.status(404).json({ message: 'Course not found for the specified teacher' });
+      }
+  
+      res.status(200).json(course);
+    } catch (error) {
+      console.error('Error fetching course details:', error);
+      res.status(500).json({ message: 'Error fetching course details' });
+    }
+  };
+  
+
+
+module.exports = { getCourseDetails ,courseCreate, courseList, StudentcourseList, deleteCourse, courseListAdmin, courseDetails};

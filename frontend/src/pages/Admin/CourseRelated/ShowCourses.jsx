@@ -1,66 +1,55 @@
-// import React, { useEffect, useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import TableTemplate from '../../../components/TableTemplate';
-// import { getCoursesByTeacher } from '../../../redux/courseRelated/courseHandle'; // Import the action creator
-// import { BlueButton } from '../../../components/buttonStyles';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-// function ShowCourses() {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
+const ShowCourse = () => {
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { currentUser } = useSelector(state => state.user);
+  const teachCourses = useSelector(state => state.course.teachCourses);
+  const currentUserCourse = teachCourses && Array.isArray(teachCourses) && teachCourses.length > 0 ? teachCourses[0]._id : null;
 
-//   const [courses, setCourses] = useState([]);
-//   const teachers = useSelector(state => state.teachers); // Assuming you have a teachers reducer in your Redux store
+  useEffect(() => {
+    console.log('Teacher ID:', currentUser._id);
+    console.log('Teach Courses:', teachCourses);
+    console.log('Current User Course:', currentUserCourse);
 
-//   useEffect(() => {
-//     // Fetch course list for each teacher when component mounts
-//     teachers.forEach(teacher => {
-//       dispatch(getCoursesByTeacher(teacher.id)); // Dispatch action to fetch courses for each teacher
-//     });
-//   }, [dispatch, teachers]);
+    if (!currentUserCourse) return;
 
-//   const columns  = [
-//     { header: 'Teacher ID', accessor: 'id' },
-//     { header: 'Teacher Name', accessor: 'name' },
-//     { header: 'Course Count', accessor: 'courseCount' },
-//   ];
+    const fetchCourse = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/Admin/courses/${currentUser._id}/${currentUserCourse}`);
+        setCourse(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
 
-//   const viewCourseDetails = (teacherID) => {
-//     navigate(`/Admin/courses/${teacherID}`);
-//   };
+    fetchCourse();
+  }, [currentUser._id, currentUserCourse, teachCourses]);
 
-//   const rows = courses.map((course) => ({
-//     title: course.title,
-//     description: course.description,
-//     actions: (
-//       <BlueButton
-//         variant="contained"
-//         onClick={() => viewCourseDetails(course._id)}
-//       >
-//         View
-//       </BlueButton>
-//     )
-//   }));
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-//   return (
-//     <div>
-//       <h2>Teachers and their Courses</h2>
-//       {Array.isArray(courses) && courses.length > 0 && 
-//         <TableTemplate columns={columns} rows={rows} />
-//       }
-//     </div>
-//   );
-// }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-// export default ShowCourses;
+  if (!course) {
+    return <div>Course not found</div>;
+  }
 
-
-import React from 'react'
-
-function ShowCourses() {
   return (
-    <div>ShowCourses</div>
-  )
-}
+    <div>
+      <h2>{course.title}</h2>
+      <p>Description: {course.description}</p>
+      {/* Render other course details here */}
+    </div>
+  );
+};
 
-export default ShowCourses
+export default ShowCourse;

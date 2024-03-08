@@ -9,7 +9,7 @@ const multer = require('multer');
 
 const { sclassCreate, sclassList, deleteSclass, deleteSclasses, getSclassDetail, getSclassStudents } = require('../controllers/class-controller.js');
 const { complainCreate, complainList } = require('../controllers/complain-controller.js');
-const { courseCreate, courseList, getCoursesDetails, getCourseDetails, getStudentCourses, StudentcourseList, deleteCourse } = require('../controllers/course-controller.js');
+const { courseCreate, courseList, getCoursesDetails, getCourseDetails, getStudentCourses, StudentcourseList, deleteCourse, courseListAdmin, courseDetails } = require('../controllers/course-controller.js');
 const { noticeCreate, noticeList, deleteNotices, deleteNotice, updateNotice } = require('../controllers/notice-controller.js');
 const {
     studentRegister,
@@ -113,6 +113,11 @@ router.post('/Teacher/addcourse/:teacherID', courseCreate);
 router.delete('/Teacher/courses/:courseID', deleteCourse);
 router.get('/Teacher/courses/:teacherID', courseList);
 router.get('/Teacher/courses/:courseId', getCourseDetails);
+
+router.get('/Admin/courses/:teacherID/:courseID', courseDetails);
+
+
+router.get('/Admin/courses/:teacherID', courseListAdmin);
 
 
 router.get('/Student/courses/:studentID', StudentcourseList);

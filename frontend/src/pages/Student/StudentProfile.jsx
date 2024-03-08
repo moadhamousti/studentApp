@@ -1,45 +1,67 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react'
+import styled from 'styled-components';
+import { Card, CardContent, Typography, Grid, Box, Avatar, Container, Paper } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const StudentProfile = () => {
-    const [image, setImage] = useState(null);
+  const { currentUser, response, error } = useSelector((state) => state.user);
 
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
-    };
+  if (response) { console.log(response) }
+  else if (error) { console.log(error) }
 
-    const handleImageUpload = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('image', image);
+  const sclassName = currentUser.sclassName
+  const studentSchool = currentUser.school
 
-            // Log FormData before sending the request
-            console.log('Form Data:', formData);
+  return (
+    <>
+      <Container maxWidth="md" sx={{ marginTop: 5 }}>
+        <StyledPaper elevation={3}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
+                <Avatar alt="Student Avatar" sx={{ width: 150, height: 150 }}>
+                  {String(currentUser.name).charAt(0)}
+                </Avatar>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
+                <Typography variant="h5" component="h2" textAlign="center">
+                  {currentUser.name}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
+                <Typography variant="subtitle1" component="p" textAlign="center">
+                  Student Roll No: {currentUser.rollNum}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
+                <Typography variant="subtitle1" component="p" textAlign="center">
+                  Class: {sclassName.sclassName}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="center">
+                <Typography variant="subtitle1" component="p" textAlign="center">
+                  School: {studentSchool.schoolName}
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </StyledPaper>
+      </Container>
+    </>
+  )
+}
 
-            const response = await axios.post('http://localhost:5000/student/profile/image/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+export default StudentProfile
 
-            // Log the response data if the request succeeds
-            console.log('Response:', response.data);
-
-            // Display success message or update UI as needed
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
-    };
-
-    return (
-        <div>
-            <h1>Student Profile</h1>
-            <input type="file" onChange={handleImageChange} />
-            <button onClick={handleImageUpload}>Upload Image</button>
-            {/* Display other student info */}
-        </div>
-    );
-};
-
-export default StudentProfile;
-
+const StyledPaper = styled(Paper)`
+  padding: 20px;
+  margin-bottom: 20px;
+`;

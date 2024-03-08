@@ -19,6 +19,7 @@ import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import Popup from '../../../components/Popup';
+import { DarkRedButton } from '../../../components/buttonStyles';
 
 const ViewStudent = () => {
     const [showTab, setShowTab] = useState(false);
@@ -355,21 +356,37 @@ const ViewStudent = () => {
     const StudentDetailsSection = () => {
         return (
             <div>
-                Name: {userDetails.name}
-                <br />
-                Roll Number: {userDetails.rollNum}
-                <br />
-                Class: {sclassName.sclassName}
-                <br />
-                School: {studentSchool.schoolName}
+                <Box bgcolor="#c9c3c3"
+                    boxShadow={2}
+                    borderRadius={4}
+                    p={2}
+                    mb={2}>
+
+                    <Typography align="center" variant="h5" gutterBottom style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        Name :  <br />
+                        <span style={{ color: '#004aba' }}>{userDetails.name}</span>
+                    </Typography>
+                    <Typography align="center" variant="h5" gutterBottom style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        Roll Number:
+                        <span style={{ color: '#004aba' }}>{userDetails.rollNum}</span>
+                    </Typography>
+                    <Typography align="center" variant="h5" gutterBottom style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        Class:
+                        <span style={{ color: '#004aba' }}>{sclassName.sclassName}</span>
+                    </Typography>
+                    <Typography align="center" variant="h5" gutterBottom style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        School: 
+                        <span style={{ color: '#004aba' }}>{studentSchool.schoolName}</span>
+                    </Typography>                     
+                </Box>
                 {
                     subjectAttendance && Array.isArray(subjectAttendance) && subjectAttendance.length > 0 && (
                         <CustomPieChart data={chartData} />
                     )
                 }
-                <Button variant="contained" sx={styles.styledButton} onClick={deleteHandler}>
+                <DarkRedButton variant="contained" sx={styles.styledButton} onClick={deleteHandler}>
                     Delete
-                </Button>
+                </DarkRedButton>
                 <br />
                 <Button variant="contained" sx={styles.styledButton} className="show-tab" onClick={() => { setShowTab(!showTab) }}>
                     {
